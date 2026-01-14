@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Farhan M</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Glass Input Fields */
+        input, textarea {
+            width: 100%; 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid var(--glass-border);
+            padding: 1rem; border-radius: 12px; 
+            color: var(--text-main); margin-bottom: 1.5rem; outline: none;
+            transition: 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        input:focus, textarea:focus { 
+            border-color: var(--mint); 
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(0, 217, 145, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="loader-wrapper">
+        <div class="loader-content mono">
+            <span class="loading-text">CONNECTING</span>
+            <div class="progress-bar"><div class="progress"></div></div>
+        </div>
+    </div>
+
+    <nav class="nav-container">
+        <div class="logo mono typewriter-trigger" data-text="Farhan M"></div>
+        <div class="nav-links mono flex items-center">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="about.html" class="nav-item">About</a>
+            <a href="portfolio.html" class="nav-item">Portfolio</a>
+            <a href="contact.html" class="nav-item active">Contact</a>
+            <button id="theme-toggle" class="theme-toggle">
+                <span id="theme-icon">🌙</span> <span id="theme-text">DARK</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="content-wrapper" style="margin-top: 80px;">
+        <div class="solutions-split reveal">
+            <div>
+                <span class="label mono typewriter-trigger" data-text="Get In Touch"></span>
+                <h2 class="serif title-large typewriter-trigger" data-text="Start a Conversation"></h2>
+                <p class="mono-text body-copy">Have a project in mind or just want to say hi? Fill out the form or reach out via WhatsApp.</p>
+                <a href="https://wa.me/923335744900" class="whatsapp-btn mono">MESSAGE ON WHATSAPP</a>
+            </div>
+            <div class="service-card">
+                <form id="contact-form">
+                    <label class="label mono">Name</label>
+                    <input type="text" placeholder="John Doe">
+                    <label class="label mono">Email</label>
+                    <input type="email" placeholder="john@example.com">
+                    <label class="label mono">Message</label>
+                    <textarea rows="4" placeholder="Tell me about your project..."></textarea>
+                    <button type="submit" class="btn-white mono" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

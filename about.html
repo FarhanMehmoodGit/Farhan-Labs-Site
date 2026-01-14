@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Farhan M</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loader-wrapper">
+        <div class="loader-content mono">
+            <span class="loading-text">LOADING BIO</span>
+            <div class="progress-bar"><div class="progress"></div></div>
+        </div>
+    </div>
+
+    <nav class="nav-container" id="mainNav">
+        <div class="logo mono typewriter-trigger nav-item" style="margin-left: 0;" data-text="Farhan M"></div>
+        <div class="nav-links mono flex items-center">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="about.html" class="nav-item active">About</a>
+            <a href="portfolio.html" class="nav-item">Portfolio</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+            <button id="theme-toggle" class="theme-toggle">
+                <span id="theme-icon">🌙</span> <span id="theme-text">DARK</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="content-wrapper" style="margin-top: 80px;">
+        <section class="solutions-split reveal">
+            <div class="solutions-text">
+                <span class="label mono typewriter-trigger" data-text="The Story"></span>
+                <h2 class="serif title-large typewriter-trigger" data-text="About Me"></h2>
+                <p class="mono-text body-copy">I am a passionate Full-Stack Developer dedicated to building digital products that combine aesthetic beauty with technical excellence. With expertise in ASP.NET Core and Flutter, I bridge the gap between complex logic and user-centric design.</p>
+                <div class="services-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; margin-bottom: 0;">
+                    <div class="service-card" style="padding: 1.5rem;">
+                        <h3 class="serif" style="font-size: 1.1rem;">Philosophy</h3>
+                        <p class="mono-text" style="font-size: 0.9rem;">Clean code is just as important as a clean UI.</p>
+                    </div>
+                    <div class="service-card" style="padding: 1.5rem;">
+                        <h3 class="serif" style="font-size: 1.1rem;">Goal</h3>
+                        <p class="mono-text" style="font-size: 0.9rem;">To build scalable solutions for global clients.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="solutions-image">
+                <img src="https://images.unsplash.com/photo-1708481480603-b47ea65c80b6?q=80&w=1631&auto=format&fit=crop" alt="Workspace">
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

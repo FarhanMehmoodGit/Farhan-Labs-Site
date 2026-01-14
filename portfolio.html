@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Farhan M</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 2.5rem; 
+        }
+
+        .project-card { cursor: pointer; transition: transform 0.3s ease; }
+        
+        /* Tag Styling - Glass Chips */
+        .tech-tag {
+            display: inline-block;
+            background: rgba(0, 217, 145, 0.1);
+            color: var(--mint);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            margin-right: 8px;
+            margin-top: 10px;
+            border: 1px solid rgba(0, 217, 145, 0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        #project-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); z-index: 2000; overflow-y: auto; padding: 40px 20px;
+            backdrop-filter: blur(15px); /* Strong blur behind modal */
+        }
+
+        .modal-content { 
+            max-width: 1100px; margin: 0 auto; 
+            background: var(--glass-surface);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(30px);
+            border-radius: 24px; padding: 3rem; position: relative;
+        }
+
+        .gallery-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 2.5rem; 
+        }
+
+        .gallery-img { 
+            width: 100%; height: 350px; object-fit: cover;
+            border-radius: 16px; border: 1px solid var(--glass-border);
+            transition: transform 0.3s ease;
+        }
+        .gallery-img:hover { transform: scale(1.02); }
+    </style>
+</head>
+<body>
+    <div id="loader-wrapper">
+        <div class="loader-content mono">
+            <span class="loading-text">SYNCING PORTFOLIO</span>
+            <div class="progress-bar"><div class="progress"></div></div>
+        </div>
+    </div>
+
+    <nav class="nav-container">
+        <div class="logo mono typewriter-trigger" data-text="Farhan M"></div>
+        <div class="nav-links mono flex items-center">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="about.html" class="nav-item">About</a>
+            <a href="portfolio.html" class="nav-item active">Portfolio</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+            <button id="theme-toggle" class="theme-toggle"><span id="theme-icon">🌙</span> <span id="theme-text">DARK</span></button>
+        </div>
+    </nav>
+
+    <main class="content-wrapper" style="margin-top: 80px;">
+        <span class="label mono reveal">Selected Works</span>
+        <h2 class="serif section-heading typewriter-trigger" data-text="My Projects"></h2>
+        
+        <div class="project-grid">
+            <div class="service-card project-card reveal" 
+                 onclick="openProject('C3 PC BUILDER', 'PC Builder is a high-performance web application designed to simplify the process of planning a custom computer. It features a tactical, terminal-inspired interface that provides real-time feedback on part compatibility, power requirements, and system grading..', ['imgs/screencapture-localhost-pcbuilder-php-2026-01-13-17_32_02.png', 'imgs/621.PNG'], ['ASP.NET Core', 'SQL Server', 'Tailwind'])">
+                <div class="mb-6 overflow-hidden rounded-lg">
+                    <img src="imgs/621.PNG" class="w-full h-64 object-cover" onerror="this.src='https://via.placeholder.com/400x250?text=PC+Builder'">
+                </div>
+                <h3 class="serif">🖥️ PC Builder | Compatibility Checker</h3>
+                <div class="tags-container">
+                    <span class="tech-tag">HTML 5</span>
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">CSS 3</span>
+                    <span class="tech-tag">TAILWINDCSS</span>
+                    <span class="tech-tag">SQL</span>
+                </div>
+            </div>
+
+            <div class="service-card project-card reveal" 
+                 onclick="openProject('Fast Secure Cloud Storage', '🚀 FlowDrive is a sleek, high-performance landing page for a next-gen cloud storage platform. Built with a security-first mindset, it combines a futuristic dark-mode aesthetic with powerful data privacy features. 🔒', ['imgs/screencapture-localhost-flowdrive-2026-01-13-17_17_22.png', 'imgs/screencapture-localhost-flowdrive-2026-01-13-17_17_44.png'], ['HTML5/CSS3', 'SQL Server', 'Tailwind'])">
+                <div class="mb-6 overflow-hidden rounded-lg">
+                    <img src="imgs/789.PNG" class="w-full h-64 object-cover" onerror="this.src='https://via.placeholder.com/400x250?text=Flow+Drive'">
+                </div>
+                <h3 class="serif">Flow Drive | CloudStorage-LP</h3>
+                <div class="tags-container">
+                    <span class="tech-tag">HTML 5</span>
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">CSS 3</span>
+                    <span class="tech-tag">TAILWINDCSS</span>
+                    <span class="tech-tag">SQL</span>
+                </div>
+            </div>
+
+            <div class="service-card project-card reveal" 
+                 onclick="openProject('High-End Real Estate Management Platform', 'This project is a high-end Real Estate Management Platform that showcases premium properties through a sophisticated, dual-themed interface. 🎨 It is designed to bridge the gap between luxury listings and interactive map exploration. 📍🌍', ['imgs/screencapture-localhost-real-estate-2026-01-13-17_18_50.png', 'imgs/screencapture-localhost-real-estate-Copy-2026-01-13-17_19_50.png', 'imgs/784.PNG', 'imgs/723.PNG'], ['ASP.NET Core', 'SQL Server', 'Tailwind'])">
+                <div class="mb-6 overflow-hidden rounded-lg">
+                    <img src="imgs/screencapture-localhost-real-estate-Copy-2026-01-13-17_19_50.png" class="w-full h-64 object-cover" onerror="this.src='https://via.placeholder.com/400x250?text=Lux+Estate'">
+                </div>
+                <h3 class="serif">Lux Estate & Pro Estate: Luxury Real Estate Inventory 🏡✨</h3>
+                <div class="tags-container">
+                    <span class="tech-tag">HTML 5</span>
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">CSS 3</span>
+                    <span class="tech-tag">TAILWINDCSS</span>
+                    <span class="tech-tag">SQL</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="project-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeProject()" style="cursor:pointer; float:right; font-size: 2rem; color: var(--mint);">&times;</span>
+            <h2 id="modal-title" class="serif text-4xl mb-2" style="color: var(--mint);"></h2>
+            <div id="modal-tags" class="mb-6"></div>
+            <p id="modal-desc" class="mono-text mb-8 text-lg" style="max-width: 800px; line-height: 1.8; color: var(--text-main); opacity: 0.9;"></p>
+            <div id="modal-gallery" class="gallery-grid"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalTags = document.getElementById('modal-tags');
+        const modalGallery = document.getElementById('modal-gallery');
+
+        function openProject(title, desc, images, tags = []) {
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            modalGallery.innerHTML = '';
+            modalTags.innerHTML = '';
+            
+            // Add Tags to Modal
+            tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'tech-tag';
+                span.innerText = tag;
+                modalTags.appendChild(span);
+            });
+
+            // Add Images to Modal
+            images.forEach(imgUrl => {
+                const img = document.createElement('img');
+                img.src = imgUrl;
+                img.className = 'gallery-img';
+                img.onerror = function() { this.src = 'https://via.placeholder.com/600x400?text=Preview+Coming+Soon'; };
+                modalGallery.appendChild(img);
+            });
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProject() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) closeProject();
+        }
+    </script>
+</body>
+</html>

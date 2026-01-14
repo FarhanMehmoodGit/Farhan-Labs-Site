@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Space+Mono&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    /* Dark Theme - Apple Glass Style */
+    --bg-gradient: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                   radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                   radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+    --base-bg: #0f0f11;
+    
+    /* The Glass Variables */
+    --glass-surface: rgba(30, 30, 35, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.03);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    
+    --mint: #3dd8a8; /* Slightly softer mint for better contrast */
+    --text-main: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.6);
+    --nav-glass: rgba(15, 15, 20, 0.6);
+}
+
+body.light-mode {
+    /* Light Theme - Frosty White Apple Style */
+    --bg-gradient: radial-gradient(at 0% 0%, hsla(189,100%,96%,1) 0, transparent 50%), 
+                   radial-gradient(at 50% 0%, hsla(225,100%,98%,1) 0, transparent 50%), 
+                   radial-gradient(at 100% 0%, hsla(340,100%,96%,1) 0, transparent 50%);
+    --base-bg: #f2f2f7;
+
+    --glass-surface: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-highlight: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    
+    --mint: #00b87a; 
+    --text-main: #1d1d1f; /* Apple's near-black */
+    --text-muted: #86868b;
+    --nav-glass: rgba(255, 255, 255, 0.65);
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; /* Apple System Font Preference */
+    background-color: var(--base-bg);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+    background-size: 200% 200%;
+    animation: gradientMove 15s ease infinite;
+    color: var(--text-main);
+    overflow-x: hidden;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Ambient Orbs for Glass Effect Depth */
+body::before, body::after {
+    content: ''; position: fixed; width: 300px; height: 300px; border-radius: 50%;
+    filter: blur(80px); z-index: -1; opacity: 0.4;
+    animation: floatOrb 10s infinite ease-in-out alternate;
+}
+body::before { background: var(--mint); top: 20%; left: 10%; animation-delay: 0s; }
+body::after { background: #8a63d2; bottom: 20%; right: 10%; animation-delay: -5s; }
+
+@keyframes floatOrb { from { transform: translate(0, 0); } to { transform: translate(30px, 50px); } }
+
+/* LOADER */
+#loader-wrapper {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--base-bg);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+}
+.loader-content { color: var(--mint); text-align: center; }
+.progress-bar { height: 4px; width: 200px; background: rgba(0, 217, 145, 0.1); margin: 15px auto; border-radius: 10px; overflow: hidden; }
+.progress { height: 100%; width: 50%; background: var(--mint); animation: load 1.5s infinite ease-in-out; border-radius: 10px; }
+@keyframes load { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+
+/* GLASS NAVIGATION */
+.nav-container {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem; position: fixed; top: 0; width: 100%; z-index: 1000;
+    
+    /* The Glass Effect */
+    background: var(--nav-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--glass-border);
+    
+    transition: all 0.4s ease;
+}
+
+.logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; cursor: pointer; color: var(--text-main); }
+.nav-item { text-decoration: none; color: var(--text-muted); font-size: 1rem; font-weight: 500; transition: color 0.3s ease; margin-left: 2.5rem; }
+.nav-item:hover, .nav-item.active { color: var(--text-main); text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+
+/* Theme Toggle */
+.theme-toggle {
+    background: var(--glass-surface); 
+    border: 1px solid var(--glass-border); 
+    color: var(--mint);
+    padding: 0.5rem 1.2rem; border-radius: 50px; cursor: pointer;
+    font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-left: 2.5rem;
+    transition: 0.3s ease; display: flex; align-items: center; gap: 8px; font-weight: 600;
+    backdrop-filter: blur(5px);
+}
+.theme-toggle:hover { background: var(--mint); color: #fff; border-color: var(--mint); }
+
+/* HERO SECTION CONTAINER */
+/* --- HERO SECTION CONTAINER --- */
+.hero-section { 
+    height: 75vh; /* Gives enough vertical space for the bottom-left placement */
+    position: relative;
+    
+    /* Layered Background: 6 Radial Gradients + 1 Abstract Image */
+    background: 
+        radial-gradient(at 0% 0%, hsla(253,16%,7%,0.8) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(225,39%,30%,0.7) 0, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(339,49%,30%,0.7) 0, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(225,39%,30%,0.6) 0, transparent 50%),
+        radial-gradient(at 100% 100%, hsla(253,16%,7%,0.8) 0, transparent 50%),
+        radial-gradient(at 50% 100%, hsla(339,20%,15%,0.7) 0, transparent 50%),
+        url('https://images.unsplash.com/photo-1669023414162-8b0573b9c6b2?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    
+    background-size: cover;
+    background-position: center;
+    
+    /* Flexbox Alignment */
+    display: flex; 
+    align-items: flex-end;    /* Pulls card to the bottom */
+    justify-content: flex-start; /* Keeps card to the left */
+    
+    /* Padding: Bottom is slightly larger (8rem) to allow the card to "breath" up */
+    padding: 4rem 4rem 8rem 4rem; 
+    
+    border-radius: 0 0 40px 40px;
+    margin-bottom: 2rem;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+/* Background Fade Overlay */
+.hero-overlay { 
+    position: absolute; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    background: linear-gradient(to top, rgba(15, 15, 17, 0.85) 0%, transparent 100%); 
+    z-index: 1; 
+}
+
+.hero-content { 
+    position: relative; 
+    z-index: 2; 
+    width: 100%; 
+}
+
+/* --- THE GLASS CARD --- */
+.hero-glass-card {
+    position: relative;
+    background: var(--glass-surface);
+    backdrop-filter: blur(50px) saturate(180%); /* Apple-style blur */
+    -webkit-backdrop-filter: blur(50px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 20px 80px rgba(0,0,0,0.4), inset 0 0 0 1px var(--glass-highlight);
+    border-radius: 32px;
+    
+    /* Sizing */
+    padding: 2.5rem 3rem; 
+    max-width: 650px;
+    width: 100%;
+    
+    /* Left Alignment ensure */
+    margin-left: 0;
+    margin-right: auto;
+    
+    /* Transition and Animation */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-color 0.3s ease;
+    animation: breathing 6s ease-in-out infinite; /* Continuous floating */
+    overflow: hidden;
+}
+
+/* Hover State - Lifts and pauses breathing */
+.hero-glass-card:hover {
+    animation-play-state: paused; 
+    transform: translateY(-25px) scale(1.02); 
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    border-color: var(--mint); 
+}
+
+/* Shine Effect Sweep */
+.hero-glass-card::after {
+    content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: skewX(-25deg);
+    pointer-events: none;
+}
+
+.hero-glass-card:hover::after {
+    animation: shineSweep 1.2s ease-out forwards;
+}
+
+/* --- ANIMATION KEYFRAMES --- */
+@keyframes breathing {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes shineSweep {
+    0% { left: -50%; }
+    100% { left: 150%; }
+}
+
+/* Text inside Glass Card */
+.hero-glass-card h1 {
+    font-size: clamp(2rem, 4vw, 3.5rem); 
+    margin: 0; 
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+    
+    /* 1. Standard Property (Put this first) */
+    background-clip: text; 
+    
+    /* 2. Vendor Specific (Required for Chrome/Safari) */
+    -webkit-background-clip: text; 
+    
+    /* 3. This makes the text see-through so the gradient shows */
+    -webkit-text-fill-color: transparent; 
+    color: transparent; /* Fallback */
+    
+    display: inline-block;
+}
+/* CONTENT & CARDS */
+.content-wrapper { 
+    padding: 4rem 4rem; box-sizing: border-box; 
+    max-width: 1400px; margin: 0 auto;
+}
+.section-heading { font-size: 3rem; margin-bottom: 4rem; display: block; color: var(--text-main); font-weight: 600; letter-spacing: -1px; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 8rem; }
+
+/* THE GLASS CARD */
+.service-card { 
+    background: var(--glass-surface);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    padding: 2.5rem; 
+    border-radius: 24px; 
+    position: relative;
+    overflow: hidden;
+
+    /* Transition for hover state */
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.4s;
+    
+    /* Breathing animation for smaller cards */
+    animation: breathingSmall 8s ease-in-out infinite;
+}
+
+/* Stagger the animation for each card so they don't move together */
+.service-card:nth-child(2) { animation-delay: -2s; }
+.service-card:nth-child(3) { animation-delay: -4s; }
+
+.service-card:hover { 
+    animation-play-state: paused; 
+    transform: translateY(-15px) scale(1.5); 
+    border-color: var(--mint);
+}
+
+.service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--mint); margin-top: 0; font-weight: 600; }
+.service-card p { color: var(--text-main); line-height: 1.7; opacity: 0.9; }
+
+/* REVEAL ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* ABOUT SECTION */
+.solutions-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 4rem; }
+.title-large { font-size: 3.5rem; line-height: 1.1; margin: 1rem 0 2rem 0; color: var(--text-main); font-weight: 700; letter-spacing: -1.5px; }
+.body-copy { margin-bottom: 3rem; color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; }
+
+.btn-white { 
+    background: var(--mint); color: #000; 
+    padding: 1rem 2.5rem; border-radius: 50px; 
+    font-weight: 700; border: none; cursor: pointer; transition: 0.3s;
+    margin-top: 2rem; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
+    box-shadow: 0 10px 20px rgba(0, 217, 145, 0.3);
+}
+.btn-white:hover { 
+    background: #fff; 
+    transform: translateY(-2px); 
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.4);
+}
+
+.solutions-image img { 
+    width: 100%; border-radius: 24px; 
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+    border: 1px solid var(--glass-border);
+}
+
+/* FOOTER */
+.site-footer { 
+    background: var(--glass-surface); 
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    padding: 4rem 4rem; color: var(--text-main); 
+    border-top: 1px solid var(--glass-border);
+    margin-top: 4rem;
+}
+.footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem; max-width: 1400px; margin: 0 auto; }
+.footer-item { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+.label { color: var(--mint); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; opacity: 0.8; }
+
+.whatsapp-btn {
+    background: rgba(37, 211, 102, 0.1); color: #25D366; 
+    padding: 0.8rem 1.8rem; border-radius: 50px;
+    text-decoration: none; font-weight: 700; font-size: 0.8rem;
+    display: inline-flex; width: fit-content; transition: 0.3s; 
+    border: 1px solid rgba(37, 211, 102, 0.3);
+}
+.whatsapp-btn:hover { background: #25D366; color: #fff; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+
+/* Floating WhatsApp */
+.whatsapp-container { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
+.whatsapp-cta {
+    display: flex; align-items: center; justify-content: center;
+    width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); 
+    color: white; border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.whatsapp-cta:hover { transform: scale(1.1); }
+
+.ambient-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1; /* Stays behind everything */
+    opacity: 0.25;
+    pointer-events: none; /* User can click through them */
+    animation: floatOrb 15s infinite ease-in-out alternate;
+}
+
+.orb-bottom-left {
+    width: 350px;
+    height: 350px;
+    background: var(--mint);
+    bottom: 5%;
+    left: -5%;
+}
+
+.orb-bottom-center {
+    width: 500px;
+    height: 300px;
+    background: hsla(225,39%,30%,1); /* Matching your hero blue */
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: -7s;
+}
+
+@media (max-width: 1024px) { 
+    .services-grid, .solutions-split, .footer-grid { grid-template-columns: 1fr; }
+    .nav-container { padding: 1.2rem 1.5rem; }
+    .theme-toggle { margin-left: 1rem; }
+    .content-wrapper { padding: 4rem 1.5rem; }
+    .hero-section { height: 50vh; padding: 2rem; }
+    .hero-section h1 { font-size: 3rem; }
+}
+@keyframes breathingSmall {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); } /* Less lift than the hero card */
+}
