@@ -123,7 +123,7 @@ body::after { background: #8a63d2; bottom: 20%; right: 10%; animation-delay: -5s
         radial-gradient(at 0% 100%, hsla(225,39%,30%,0.6) 0, transparent 50%),
         radial-gradient(at 100% 100%, hsla(253,16%,7%,0.8) 0, transparent 50%),
         radial-gradient(at 50% 100%, hsla(339,20%,15%,0.7) 0, transparent 50%),
-        url('https://images.unsplash.com/photo-1669023414162-8b0573b9c6b2?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        url('./imgs/ChatGPT\ Image\ Jan\ 15\,\ 2026\,\ 04_48_15\ PM.png');
     
     background-size: cover;
     background-position: center;
@@ -373,3 +373,20 @@ body::after { background: #8a63d2; bottom: 20%; right: 10%; animation-delay: -5s
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-8px); } /* Less lift than the hero card */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
