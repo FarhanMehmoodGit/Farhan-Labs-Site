@@ -1,17 +1,22 @@
-/**
- * TYPEWRITER ENGINE
- */
+// 1. Initial State & Variable Definitions
+const body = document.body;
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const themeText = document.getElementById('theme-text');
+const backToTopBtn = document.getElementById('backToTop');
+
+// 2. Typewriter Engine
 const typeElement = (element) => {
     const text = element.getAttribute('data-text');
+    if (!text) return;
     let index = 0;
     element.innerHTML = ''; 
     element.classList.add('typing');
-
     const writer = () => {
         if (index < text.length) {
             element.innerHTML += text.charAt(index);
             index++;
-            setTimeout(writer, element.tagName === 'P' ? 10 : 35);
+            setTimeout(writer, 35);
         } else {
             element.classList.remove('typing');
         }
@@ -19,38 +24,20 @@ const typeElement = (element) => {
     writer();
 };
 
-/**
- * THEME LOGIC
- */
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
-const themeText = document.getElementById('theme-text');
-
+// 3. Theme Logic Function
 const setMode = (isLight) => {
     if (isLight) {
-        document.body.classList.add('light-mode');
-        themeIcon.textContent = '☀️';
-        themeText.textContent = 'LIGHT';
-        localStorage.setItem('theme', 'light');
+        body.classList.add('light-mode');
+        if (themeIcon) themeIcon.textContent = '☀️';
+        if (themeText) themeText.textContent = 'LIGHT';
     } else {
-        document.body.classList.remove('light-mode');
-        themeIcon.textContent = '🌙';
-        themeText.textContent = 'DARK';
-        localStorage.setItem('theme', 'dark');
+        body.classList.remove('light-mode');
+        if (themeIcon) themeIcon.textContent = '🌙';
+        if (themeText) themeText.textContent = 'DARK';
     }
 };
 
-// Init Theme
-if (localStorage.getItem('theme') === 'light') setMode(true);
-
-themeToggle.addEventListener('click', () => {
-    const isCurrentlyLight = document.body.classList.contains('light-mode');
-    setMode(!isCurrentlyLight);
-});
-
-/**
- * SCROLL OBSERVER
- */
+// 4. Scroll Observer
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -65,48 +52,54 @@ const scrollObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.15 });
 
-/**
- * PARALLAX
- */
-window.addEventListener('scroll', () => {
-    const img = document.querySelector('.solutions-image img');
-    if (img) {
-        const scrolled = window.pageYOffset;
-        img.style.transform = `translateY(${scrolled * 0.05}px)`;
-    }
-});
+// 5. Theme Event Listener (With Fade Effect)
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        body.style.opacity = '0.9'; // Quick fade effect
+        
+        setTimeout(() => {
+            const isCurrentlyLight = body.classList.contains('light-mode');
+            const nextMode = !isCurrentlyLight;
+            
+            setMode(nextMode);
+            localStorage.setItem('theme', nextMode ? 'light' : 'dark');
+            
+            body.style.opacity = '1';
+        }, 150);
+    });
+}
 
-/**
- * LOADER HANDLER
- */
+// 6. Loader & Initializer
 window.addEventListener('load', () => {
     const loader = document.getElementById('loader-wrapper');
+    const progress = document.querySelector('.progress');
+    
+    // Check saved theme immediately on load
+    const savedTheme = localStorage.getItem('theme');
+    setMode(savedTheme === 'light');
+
+    if (progress) progress.style.width = '100%';
+    
     setTimeout(() => {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.visibility = 'hidden';
-            document.body.style.overflow = 'auto';
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.visibility = 'hidden';
+                body.style.overflow = 'auto';
+                // Observe elements after loader is gone
+                document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el));
+                document.querySelectorAll('.typewriter-trigger').forEach(el => scrollObserver.observe(el));
+            }, 800);
+        } else {
             document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el));
             document.querySelectorAll('.typewriter-trigger').forEach(el => scrollObserver.observe(el));
-        }, 800);
-    }, 1200);
-});
-/**
- * BACK TO TOP LOGIC
- */
-const backToTopBtn = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
-    }
+        }
+    }, 1000);
 });
 
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+// 7. Back to Top Logic
+if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.pageYOffset > 300 ? "block" : "none";
     });
-});
+}

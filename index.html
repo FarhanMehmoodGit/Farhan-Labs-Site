@@ -3,94 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farhan Labs</title>
+    <title>Farhan Labs | Digital Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="indexcss.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div id="loader-wrapper">
-        <div class="loader-content mono">
-            <span class="loading-text">INITIALIZING</span>
-            <div class="progress-bar"><div class="progress"></div></div>
-            <p class="click-prompt">LOADING Website...</p>
+    <div id="loader-wrapper" style="position:fixed; inset:0; background:#0f0f11; z-index:9999; display:flex; align-items:center; justify-content:center;">
+    <div class="loader-content mono" style="text-align:center; color:white;">
+        <span class="typewriter-trigger" data-text="Initialising Systems..."></span>
+        
+        <div style="width:200px; height:2px; background:rgba(255,255,255,0.1); margin-top:10px;">
+            <div class="progress" style="width:0%; height:100%; background:#3dd8a8; transition:0.4s;"></div>
+        </div>
+
+        <div style="margin-top: 12px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: #3dd8a8; animation: pulseFade 2s infinite ease-in-out;">
+            Loading Website
         </div>
     </div>
+</div>
 
-    <nav class="nav-container" id="mainNav">
-        <div class="logo mono typewriter-trigger nav-item" style="margin-left: 0;" data-text="Farhan Labs"></div>
-        <div class="nav-links mono flex items-center">
-            <a href="index.html" class="nav-item">Home</a>
-            <a href="about.html" class="nav-item">About Us</a>
-            <a href="portfolio.html" class="nav-item">Our Portfolio</a>
-            <a href="contact.html" class="nav-item">Contact Us</a>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-                <span id="theme-icon">🌙</span> <span id="theme-text">DARK</span>
-            </button>
+<style>
+    @keyframes pulseFade {
+        0%, 100% { opacity: 0.3; transform: translateY(0); }
+        50% { opacity: 1; transform: translateY(-2px); }
+    }
+</style>
+
+    <nav class="nav-container">
+        <div class="logo mono typewriter-trigger" data-text="Farhan Labs"></div>
+        <div class="nav-links mono">
+            <a href="index.html" class="nav-item typewriter-trigger" data-text="Home"></a>
+            <a href="portfolio.html" class="nav-item typewriter-trigger" data-text="Projects"></a>
+            <a href="about.html" class="nav-item typewriter-trigger" data-text="About"></a>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 1.5rem;">
+                <a href="contact.html" class="btn-white small-btn typewriter-trigger" data-text="Get In Touch"></a>
+                <button id="theme-toggle" class="theme-toggle">
+    <span id="theme-icon">🌙</span>
+    <span id="theme-text" class="mono">DARK</span>
+</button>
+            </div>
         </div>
     </nav>
 
-<section class="hero-section">
-    <div class="hero-content">
-    <div class="hero-glass-card">
-        <h1 class="serif typewriter-trigger" data-text="Fast, Secure Apps and Websites"></h1>
-    </div>
-</div>
-</section>
+    <section class="fennel-hero">
+        <div class="hero-content-layout">
+            <div class="hero-text-area">
+                <h1 class="serif typewriter-trigger" data-text="Nurturing Enterprise Growth, Rooted In Digital Design."></h1>
+            </div>
+            <div class="hero-card-area">
+                <div class="explore-card reveal">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="background: var(--mint); color: #000; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 12px;">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <div>
+                            <strong class="typewriter-trigger" data-text="Explore our work"></strong>
+                            <br><small class="typewriter-trigger" data-text="Case Studies 2026" style="opacity: 0.7;"></small>
+                        </div>
+                    </div>
+                    <p class="mono-text typewriter-trigger" data-text="Bridging the gap between complex engineering and intuitive user experiences." style="font-size: 0.85rem; margin: 1.2rem 0; opacity: 0.8;"></p>
+                    
+                    <a href="portfolio.html" class="small-btn typewriter-trigger" data-text="View Projects" 
+                       style="background: #3dd8a8; color: #000; font-weight: 700; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; display: inline-block; box-shadow: 0 4px 15px rgba(61, 216, 168, 0.3);"></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <main class="content-wrapper">
-        <section class="services-area">
-            <h2 class="serif section-heading typewriter-trigger" data-text="Our Services"></h2>
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <h3 class="serif typewriter-trigger" data-text="Frontend Web UI/UX"></h3>
-                    <p class="mono-text typewriter-trigger" data-text="We design responsive, high-performance interfaces and scalable APIs for web apps."></p>
-                </div>
-                <div class="service-card reveal">
-                    <h3 class="serif typewriter-trigger" data-text="Backend APIs"></h3>
-                    <p class="mono-text typewriter-trigger" data-text="We build robust backend services with ASP.NET Core, focusing on clean architecture."></p>
-                </div>
-                <div class="service-card reveal">
-                    <h3 class="serif typewriter-trigger" data-text="Mobile Apps"></h3>
-                    <p class="mono-text typewriter-trigger" data-text="Cross-platform mobile apps built with Flutter that feel native and work offline."></p>
-                </div>
+        <h2 class="serif section-heading typewriter-trigger" data-text="Our Core Services."></h2>
+        <section class="services-grid">
+            
+            <div class="service-card reveal">
+                <i class="fa-solid fa-chess-knight"></i>
+                <h3 class="typewriter-trigger" data-text="Strategy"></h3>
+                <p class="typewriter-trigger" data-text="Digital roadmaps focused on long-term scalability and market entry."></p>
             </div>
-        </section>
 
-        <section class="solutions-split reveal">
-            <div class="solutions-text">
-                <span class="label mono typewriter-trigger" data-text="Capability"></span>
-                <h2 class="serif title-large typewriter-trigger" data-text="Full-Stack Solutions"></h2>
-                <p class="mono-text body-copy typewriter-trigger" data-text="We provide end-to-end development across frontend, backend, and cloud platforms with a focus on speed and security."></p>
-                <a href="contact.html">
-  <button class="btn-white mono">Start Project</button>
-                </a>
+            <div class="service-card reveal">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3 class="typewriter-trigger" data-text="UI/UX Design"></h3>
+                <p class="typewriter-trigger" data-text="Immersive, user-centric interfaces built for conversion and retention."></p>
             </div>
-            <div class="solutions-image">
-                <img src="imgs/Capture.PNG" alt="Development environment setup">
+
+            <div class="service-card reveal">
+                <i class="fa-solid fa-bolt"></i>
+                <h3 class="typewriter-trigger" data-text="Optimization"></h3>
+                <p class="typewriter-trigger" data-text="Techniques that ensure sub-second load times and peak performance."></p>
             </div>
+
+            <div class="service-card reveal">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3 class="typewriter-trigger" data-text="Security"></h3>
+                <p class="typewriter-trigger" data-text="Enterprise-grade protection for your sensitive data and assets."></p>
+            </div>
+
+            <div class="service-card reveal">
+                <i class="fa-solid fa-code"></i>
+                <h3 class="typewriter-trigger" data-text="Full-Stack"></h3>
+                <p class="typewriter-trigger" data-text="End-to-end development from database architecture to frontend."></p>
+            </div>
+
+            <div class="service-card reveal">
+                <i class="fa-solid fa-chart-line"></i>
+                <h3 class="typewriter-trigger" data-text="SEO Growth"></h3>
+                <p class="typewriter-trigger" data-text="Strategic ranking improvements to drive organic traffic and visibility."></p>
+            </div>
+
+            <div class="service-card reveal">
+                <i class="fa-solid fa-mobile-screen"></i>
+                <h3 class="typewriter-trigger" data-text="App Dev"></h3>
+                <p class="typewriter-trigger" data-text="Native-feel cross-platform mobile applications for iOS & Android."></p>
+            </div>
+
+            <div class="service-card reveal">
+                <i class="fa-solid fa-headset"></i>
+                <h3 class="typewriter-trigger" data-text="Support"></h3>
+                <p class="typewriter-trigger" data-text="Dedicated maintenance and rapid response for all live systems."></p>
+            </div>
+
+            <div class="service-card reveal">
+                <i class="fa-solid fa-cloud"></i>
+                <h3 class="typewriter-trigger" data-text="Cloud Systems"></h3>
+                <p class="typewriter-trigger" data-text="Scalable cloud infrastructure management and serverless solutions."></p>
+            </div>
+
         </section>
     </main>
 
+    <section class="capability-section reveal">
+        <div class="capability-container">
+            <div class="capability-content">
+                <span class="mono capability-tag typewriter-trigger" data-text="CAPABILITY"></span>
+                <h2 class="serif typewriter-trigger" data-text="Full-Stack Solutions"></h2>
+                <p class="typewriter-trigger" data-text="We provide end-to-end development across frontend, backend, and cloud platforms with a focus on speed and security."></p>
+                <div class="capability-action">
+                    <a href="contact.html" class="btn-mint">START PROJECT</a>
+                </div>
+            </div>
+            <div class="capability-image-box">
+                <img src="imgs/Capture.PNG" alt="Full Stack Solutions" class="floating-img">
+                <div class="capability-glow"></div>
+            </div>
+        </div>
+    </section>
+
     <footer class="site-footer">
-        <div class="footer-grid">
-            <div class="footer-item">
-                <p class="label mono">Office Location :</p>
-                <a>...</a>
+        <div class="footer-cta-box reveal">
+            <h2 class="serif typewriter-trigger" data-text="Let's build something great."></h2>
+            <form class="footer-form">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <button type="submit" style="background: #3dd8a8; color: #000; font-weight: 700; padding: 0.8rem 2.5rem; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(61, 216, 168, 0.3);">Send Message</button>
+            </form>
+        </div>
+
+        <div class="footer-bottom-grid">
+            <div class="footer-col">
+                <div class="logo mono typewriter-trigger" data-text="Farhan Labs"></div>
+                <p class="typewriter-trigger" data-text="© 2026 Innovation Driven Development." style="opacity: 0.5; font-size: 0.85rem; margin-top: 0.5rem;"></p>
             </div>
-            <div class="footer-item">
-                <p class="label mono">Availability :</p>
-                <p class="mono-text typewriter-trigger" data-text="Mon-Sat: 09:00 - 19:00"></p>
+
+            <div class="footer-col">
+                <strong class="typewriter-trigger" data-text="Contact"></strong>
+                <a href="mailto:hello@farhanlabs.com" class="typewriter-trigger" data-text="hello@farhanlabs.com"></a>
+                <a href="tel:+923335755900" class="typewriter-trigger" data-text="+92 333 5755900"></a>
             </div>
-            <div class="footer-item">
-                <p class="label mono">Digital :</p>
-                <p> ... </p>
+
+            <div class="footer-col">
+                <strong class="typewriter-trigger" data-text="Company"></strong>
+                <a href="portfolio.html" class="typewriter-trigger" data-text="Projects"></a>
+                <a href="about.html" class="typewriter-trigger" data-text="About"></a>
+                <a href="contact.html" class="typewriter-trigger" data-text="Contact"></a>
+            </div>
+
+            <div class="footer-col">
+                <strong class="typewriter-trigger" data-text="Socials"></strong>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" class="typewriter-trigger" data-text="LinkedIn"></a>
+                    <a href="#" class="typewriter-trigger" data-text="Twitter"></a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <button id="backToTop" style="display:none; position:fixed; bottom:20px; right:20px; z-index:1000;">↑</button>
+
+    <div class="ambient-orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+
     <script src="script.js"></script>
-    <div class="ambient-orb orb-bottom-left"></div>
-<div class="ambient-orb orb-bottom-center"></div>
 </body>
 </html>
