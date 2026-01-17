@@ -103,3 +103,75 @@ if (backToTopBtn) {
         backToTopBtn.style.display = window.pageYOffset > 300 ? "block" : "none";
     });
 }
+// 8. Image Slider Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const sliders = document.querySelectorAll('.slider-wrapper');
+
+    sliders.forEach(slider => {
+        const track = slider.querySelector('.slider-track');
+        const prevBtn = slider.querySelector('.prev');
+        const nextBtn = slider.querySelector('.next');
+        const images = track.querySelectorAll('img');
+        
+        if (images.length <= 1) {
+            if(prevBtn) prevBtn.style.display = 'none';
+            if(nextBtn) nextBtn.style.display = 'none';
+            return;
+        }
+
+        let currentIndex = 0;
+
+        const updateSlider = () => {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        };
+
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent link jumps
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Loop back to start
+            }
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = images.length - 1; // Loop to end
+            }
+            updateSlider();
+        });
+    });
+});
+// IMAGE SLIDER LOGIC
+document.addEventListener('DOMContentLoaded', () => {
+    const sliders = document.querySelectorAll('.slider-wrapper');
+    
+    sliders.forEach(slider => {
+        const track = slider.querySelector('.slider-track');
+        const nextBtn = slider.querySelector('.next');
+        const prevBtn = slider.querySelector('.prev');
+        const images = track.querySelectorAll('img');
+        
+        let currentIndex = 0;
+
+        const updateSlider = () => {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        };
+
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentIndex = (currentIndex + 1) % images.length;
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateSlider();
+        });
+    });
+});

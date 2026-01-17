@@ -8,13 +8,11 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* --- NAVIGATION FIX (Prevents Button Clipping) --- */
+/* --- NAVIGATION --- */
 .nav-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80px; 
+    top: 0; left: 0;
+    width: 100%; height: 80px; 
     display: flex;
     align-items: center; 
     justify-content: space-between;
@@ -22,30 +20,11 @@ body {
     background: rgba(10, 10, 12, 0.85);
     backdrop-filter: blur(25px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    z-index: 100000; /* Higher than everything else */
+    z-index: 100000;
     box-sizing: border-box;
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover { color: var(--mint); }
-
-/* --- CASE CONTAINER --- */
-.case-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 160px 24px 100px; 
-}
-
-/* --- CAROUSEL WITH FIXED ARROWS --- */
+/* --- CAROUSEL (The Slider) --- */
 .carousel-container {
     position: relative;
     width: 100%;
@@ -55,16 +34,30 @@ body {
     background: #000;
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 80px;
+    transition: all 0.5s ease;
+}
+
+.carousel-container:hover {
+    border-color: var(--mint);
+    box-shadow: 0 20px 80px -20px rgba(0,0,0,0.8);
 }
 
 .carousel-wrapper {
-    display: flex;
+    display: flex; 
     height: 100%;
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.carousel-slide { min-width: 100%; height: 100%; }
-.carousel-slide img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.carousel-slide { 
+    min-width: 100%; 
+    height: 100%; 
+}
+
+.carousel-slide img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
 
 .carousel-btn {
     position: absolute;
@@ -89,34 +82,22 @@ body {
 .prev-arrow { left: 20px; }
 .next-arrow { right: 20px; }
 
-/* --- FULL SCREEN GALLERY & FADE ANIMATION --- */
-.gallery-popup {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(7, 7, 8, 0.98);
-    backdrop-filter: blur(40px);
-    z-index: 100001; 
-    display: none;
-    overflow-y: auto;
-    padding: 120px 8%;
-    box-sizing: border-box;
+/* --- SECTION CARDS HOVER --- */
+.section-grid > div {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2.5rem;
+    border-radius: 20px;
+    transition: all 0.4s ease;
 }
 
-.gallery-popup.active { display: block; }
-
-/* The Fade-In Animation */
-.gallery-item {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+.section-grid > div:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--mint);
+    transform: translateY(-10px);
 }
 
-.gallery-popup.active .gallery-item {
-    opacity: 1;
-    transform: translateY(0);
-}
-
+/* --- GALLERY GRID & LIGHTBOX --- */
 .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -127,20 +108,15 @@ body {
     width: 100%;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
     cursor: zoom-in;
 }
 
-.close-popup {
-    position: fixed;
-    top: 30px; right: 40px;
-    font-size: 3rem; color: #fff;
-    cursor: pointer; z-index: 100002;
-    transition: 0.3s;
+.gallery-item img:hover {
+    transform: scale(1.03);
+    border-color: var(--mint);
 }
 
-.close-popup:hover { color: var(--mint); transform: scale(1.1); }
-
-/* --- LIGHTBOX ZOOM --- */
 .lightbox {
     display: none;
     position: fixed;
@@ -150,27 +126,5 @@ body {
     z-index: 200000;
     align-items: center;
     justify-content: center;
-    cursor: zoom-out;
 }
-.lightbox.active { display: flex; }
-.lightbox img { max-width: 90%; max-height: 90%; border-radius: 8px; }
-
-/* --- TRIGGER BUTTON --- */
-.popup-trigger-wrap { text-align: center; padding: 100px 0; }
-.btn-open-gallery {
-    background: transparent;
-    border: 1px solid var(--mint);
-    color: var(--mint);
-    padding: 18px 45px;
-    border-radius: 50px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: 0.4s;
-    letter-spacing: 1px;
-}
-.btn-open-gallery:hover {
-    background: var(--mint);
-    color: #000;
-    box-shadow: 0 10px 40px rgba(0, 255, 204, 0.2);
-}
+.lightbox.active { display: flex !important; }
