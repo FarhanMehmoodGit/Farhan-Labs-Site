@@ -1,130 +1,214 @@
-/* --- CORE THEME --- */
-@import url('styles.css'); 
-
-body {
-    background-color: #0a0a0c;
-    color: #fff;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+/* --- NAMESPACED CASE STUDY STYLES --- */
+.cs-page {
+    --cs-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    
+    /* DARK MODE: Transparent Dark Glass */
+    --cs-nav-bg: rgba(10, 10, 12, 0.1); /* 0.1 makes it nearly transparent */
+    --cs-card-bg: rgba(255, 255, 255, 0.03);
+    --cs-text-main: #ffffff;
+    --cs-text-sub: rgba(255, 255, 255, 0.7);
+    --cs-viewport-bg: #0a0a0c;
+    --cs-border: rgba(255, 255, 255, 0.1);
 }
 
-/* --- NAVIGATION --- */
-.nav-container {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 80px; 
-    display: flex;
-    align-items: center; 
-    justify-content: space-between;
-    padding: 0 40px;
-    background: rgba(10, 10, 12, 0.85);
-    backdrop-filter: blur(25px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    z-index: 100000;
-    box-sizing: border-box;
+/* --- LIGHT MODE OVERRIDES --- */
+body.light-mode {
+    /* LIGHT MODE: Transparent Light Glass */
+    --cs-nav-bg: rgba(255, 255, 255, 0.05); 
+    --cs-card-bg: rgba(0, 0, 0, 0.03);
+    --cs-text-main: #1a1a1a;
+    --cs-text-sub: rgba(0, 0, 0, 0.6);
+    --cs-viewport-bg: #f0f0f2;
+    --cs-border: rgba(0, 0, 0, 0.1);
 }
 
-/* --- CAROUSEL (The Slider) --- */
-.carousel-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    border-radius: 24px;
+/* 1. THE ULTIMATE NAVBAR FIX */
+.nav-container, .cs-navbar-fixed {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 75px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 5% !important;
+    z-index: 99999 !important;
+    
+    /* TRANSPARENCY SETTINGS */
+    background: var(--cs-nav-bg) !important;
+    backdrop-filter: blur(10px) saturate(180%) !important; /* Blurs background for readability */
+    -webkit-backdrop-filter: blur(10px) saturate(180%) !important;
+    
+    /* Set border to transparent if you want NO line at the bottom */
+    border-bottom: 1px solid var(--cs-border) !important; 
+    box-sizing: border-box !important;
+}
+
+.nav-container .nav-links, .cs-navbar-fixed .nav-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: 2.5rem !important;
+}
+
+.nav-container .nav-item, .cs-navbar-fixed .nav-item {
+    text-decoration: none !important;
+    color: var(--cs-text-sub) !important;
+    font-size: 1.2rem !important;
+    transition: 0.3s ease;
+}
+
+.nav-container .nav-item:hover, .cs-navbar-fixed .nav-item.active {
+    color: var(--mint) !important;
+}
+
+/* 2. LAYOUT ADJUSTMENT */
+.cs-layout { 
+    max-width: 1200px; 
+    margin: 120px auto 0 !important; /* Pushes content below the 75px nav */
+    padding: 20px 5%; 
+}
+
+/* 3. SCROLL PROGRESS */
+.cs-progress-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100000; }
+#cs-bar { width: 0%; height: 100%; background: var(--mint); box-shadow: 0 0 15px var(--mint); }
+
+/* 4. THE IMAGE CARD + HOVER */
+.cs-display-unit {
+    background: var(--cs-card-bg) !important;
+    border: 1px solid var(--cs-border) !important;
+    border-radius: 40px;
+    padding: 24px;
+    margin: 4rem 0 6rem;
     overflow: hidden;
-    background: #000;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 80px;
-    transition: all 0.5s ease;
+    transition: transform 0.6s var(--cs-ease), border-color 0.3s ease;
 }
 
-.carousel-container:hover {
-    border-color: var(--mint);
-    box-shadow: 0 20px 80px -20px rgba(0,0,0,0.8);
+.cs-display-unit:hover {
+    transform: translateY(-15px) scale(1.005);
+    border-color: var(--mint) !important;
+    box-shadow: 0 40px 80px -15px var(--cs-shadow);
 }
 
-.carousel-wrapper {
+/* 5. VIEWPORT & SLIDER (The Zoom Fix) */
+.cs-viewport { 
+    width: 100%; 
+    height: 550px; /* Consistent height */
+    overflow: hidden; 
+    border-radius: 20px; 
+    background: var(--cs-viewport-bg);
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cs-slider-track { 
     display: flex; 
     height: 100%;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+    transition: transform 0.8s var(--cs-ease); 
 }
 
-.carousel-slide { 
+.cs-slide { 
     min-width: 100%; 
-    height: 100%; 
-}
-
-.carousel-slide img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.3s;
 }
 
-.carousel-btn:hover { background: var(--mint); color: #000; border-color: var(--mint); }
-.prev-arrow { left: 20px; }
-.next-arrow { right: 20px; }
-
-/* --- SECTION CARDS HOVER --- */
-.section-grid > div {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 2.5rem;
-    border-radius: 20px;
-    transition: all 0.4s ease;
-}
-
-.section-grid > div:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--mint);
-    transform: translateY(-10px);
-}
-
-/* --- GALLERY GRID & LIGHTBOX --- */
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 40px;
-}
-
-.gallery-item img {
-    width: 100%;
+.cs-slide img { 
+    max-width: 92%; 
+    max-height: 90%; 
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Shows the full image without zoom */
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.4s ease;
-    cursor: zoom-in;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
-.gallery-item img:hover {
-    transform: scale(1.03);
-    border-color: var(--mint);
+/* 6. SLIDER CONTROLS */
+.cs-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding: 0 10px; }
+.cs-counter { font-family: 'Space Mono', monospace; color: var(--mint); font-size: 0.9rem; }
+.cs-nav-group { display: flex; gap: 15px; }
+.cs-nav {
+    width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--cs-border);
+    background: var(--cs-card-bg); color: var(--cs-text-main); cursor: pointer; transition: 0.3s;
+    display: flex; align-items: center; justify-content: center;
 }
+.cs-nav:hover { background: var(--mint); color: #000; border-color: var(--mint); }
 
-.lightbox {
-    display: none;
+/* 7. EDITORIAL CONTENT */
+.cs-header { margin-bottom: 3rem; }
+.cs-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin: 0.5rem 0; letter-spacing: -2px; color: var(--cs-text-main); }
+.cs-label { font-family: 'Space Mono', monospace; color: var(--mint); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+
+.cs-stats-row { display: flex; gap: 3rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--cs-border); }
+.cs-stat small { display: block; font-family: 'Space Mono', monospace; color: var(--mint); font-size: 0.65rem; margin-bottom: 5px; }
+.cs-stat span { font-weight: 500; font-size: 1rem; color: var(--cs-text-main); }
+
+.cs-content-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 10%; margin: 6rem 0; }
+.cs-sticky-h { position: sticky; top: 120px; height: fit-content; }
+.cs-sticky-h h2 { font-size: 2.5rem; color: var(--cs-text-main); }
+.cs-body { font-size: 1.15rem; line-height: 1.7; color: var(--cs-text-sub); }
+.cs-highlight-box { margin-top: 2rem; padding: 2rem; border-left: 3px solid var(--mint); background: rgba(61, 216, 168, 0.05); font-style: italic; color: var(--cs-text-main); }
+
+/* 8. FOOTER NAVIGATION */
+.cs-project-footer { border-top: 1px solid var(--cs-border); padding: 60px 0; margin-top: 60px; }
+.cs-footer-content { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; }
+.cs-next-unit {
+    display: block; padding: 30px; background: var(--cs-card-bg); border: 1px solid var(--cs-border);
+    border-radius: 20px; text-decoration: none; transition: 0.4s var(--cs-ease);
+}
+.cs-next-unit:hover { transform: translateY(-5px); border-color: var(--mint); }
+.cs-next-unit small { color: var(--mint); display: block; margin-bottom: 8px; font-family: 'Space Mono', monospace; }
+.cs-next-unit span { font-size: 1.5rem; font-weight: 700; color: var(--cs-text-main); }
+
+/* 9. BACK BUTTON (FIXED) */
+.cs-back-btn {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95);
-    z-index: 200000;
+    top: 105px; /* Sits below the 75px navbar */
+    right: 5%;
+    z-index: 990;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+    background: var(--cs-nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--cs-border);
+    border-radius: 100px;
+    color: var(--cs-text-main);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.4s var(--cs-ease);
+    display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
 }
-.lightbox.active { display: flex !important; }
+
+.cs-back-btn:hover {
+    background: var(--mint); 
+    color: #000;
+    border-color: var(--mint);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(61, 216, 168, 0.3);
+}
+
+/* 10. RESPONSIVE */
+@media (max-width: 900px) {
+    .cs-content-grid, .cs-footer-content { grid-template-columns: 1fr; gap: 3rem; }
+    .cs-sticky-h { position: relative; top: 0; }
+    .cs-viewport { height: 350px; }
+}
+
+@media (max-width: 600px) {
+    .cs-back-btn {
+        top: auto;
+        bottom: 25px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 0.8rem;
+    }
+}

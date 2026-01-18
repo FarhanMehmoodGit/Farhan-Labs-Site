@@ -3,61 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlowDrive | Case Study</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="case-study.css">
+    <title>FlowDrive Cloud | Case Study</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="case-study.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <nav class="nav-container">
-        <div class="logo mono" style="color: var(--mint); font-weight: bold;">FARHAN M</div>
-        <div class="nav-links">
-            <a href="portfolio.html">← BACK TO PROJECTS</a>
-        </div>
-    </nav>
+<body class="cs-page">
+    <div class="cs-progress-wrap"><div id="cs-bar"></div></div>
 
-    <main class="case-container">
-        <header class="case-header">
-            <span class="case-category">FULL CASE STUDY / 2026</span>
-            <h1 class="case-title">FLOW <br><span style="color: var(--mint)">DRIVE</span></h1>
+    <nav class="cs-navbar-fixed">
+    <div class="logo mono typewriter-trigger" data-text="Farhan M"></div>
+    <div class="nav-links mono">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="about.html" class="nav-item">About</a>
+        <a href="portfolio.html" class="nav-item active">Portfolio</a>
+        <button id="theme-toggle" class="theme-toggle">
+            <span id="theme-icon">🌙</span> 
+            <span id="theme-text">DARK</span>
+        </button>
+    </div>
+</nav>
+<a href="portfolio.html" class="cs-back-btn mono">
+    <i class="fas fa-arrow-left"></i> Back to Portfolio
+</a>
+
+    <main class="cs-layout">
+        <header class="cs-header">
+            <span class="cs-label">Cloud Infrastructure</span>
+            <h1 class="cs-title">FlowDrive Cloud</h1>
+            <div class="cs-stats-row">
+                <div class="cs-stat"><small>TIME</small><span>8 Weeks</span></div>
+                <div class="cs-stat"><small>ROLE</small><span>Backend Dev</span></div>
+                <div class="cs-stat"><small>STACK</small><span>Node.js / AWS</span></div>
+            </div>
         </header>
 
-        <div class="carousel-container">
-            <button class="carousel-btn prev-arrow" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-            <button class="carousel-btn next-arrow" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
-            <div class="carousel-wrapper" id="mainCarousel">
-                <div class="carousel-slide"><img src="imgs/789.PNG" class="zoom-trigger"></div>
-                <div class="carousel-slide"><img src="imgs/789.PNG" class="zoom-trigger" style="filter: brightness(0.8);"></div>
+        <div class="cs-display-unit">
+            <div class="cs-viewport">
+                <div class="cs-slider-track">
+                    <div class="cs-slide"><img src="imgs/789.png" alt="Cloud Interface"></div>
+                    <div class="cs-slide"><img src="imgs/Cap756.PNG" alt="Storage Dashboard"></div>
+                    <div class="cs-slide"><img src="imgs/734.PNG" alt="Storage Dashboard"></div>
+                    <div class="cs-slide"><img src="imgs/screencapture-localhost-flowdrive-pricing-php-2026-01-13-17_18_11.png" alt="Storage Dashboard"></div>
+                </div>
+            </div>
+            <div class="cs-controls">
+                <div class="cs-counter">01 / 02</div>
+                <div class="cs-nav-group">
+                    <button class="cs-nav prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="cs-nav next"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
         </div>
 
-        <section class="section-grid">
-            <div>
-                <span class="section-label">01 / VISION</span>
-                <h2 class="section-title">Secure Storage</h2>
-                <p class="body-copy">FlowDrive prioritizes security without sacrificing high-performance aesthetics, offering users a seamless cloud dashboard experience.</p>
+        <section class="cs-content-grid">
+            <div class="cs-sticky-h">
+                <h2 class="serif">The Scalability</h2>
             </div>
-            <div>
-                <span class="section-label">02 / INFRASTRUCTURE</span>
-                <h2 class="section-title">Next-Gen SaaS</h2>
-                <p class="body-copy">Built with Tailwind and end-to-end encryption to provide a reliable and beautiful professional storage tool.</p>
+            <div class="cs-body">
+                <p>FlowDrive was built to handle high-frequency data transfers with zero latency. We focused on optimizing the cloud handshake protocols.</p>
+                <div class="cs-highlight-box">
+                    "Redefining how users interact with remote storage through instant synchronization."
+                </div>
             </div>
         </section>
 
-        <div class="popup-trigger-wrap">
-            <button class="btn-open-gallery" onclick="toggleGallery(true)">EXPLORE FULL GALLERY</button>
-        </div>
+        <footer class="cs-project-footer">
+            <div class="cs-footer-content">
+                <div class="cs-footer-left">
+                    <span class="cs-label">Final Thoughts</span>
+                    <h2 class="serif">Secure, fast, and borderless data management.</h2>
+                </div>
+                <div class="cs-footer-right">
+                    <a href="case-thirdproject.html" class="cs-next-unit">
+                        <small>NEXT PROJECT</small>
+                        <span>Project Three <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </footer>
     </main>
 
-    <div id="galleryPopup" class="gallery-popup">
-        <span class="close-popup" onclick="toggleGallery(false)">&times;</span>
-        <h2 class="section-title" style="font-size: 3rem; margin-bottom: 50px;">Interface Preview</h2>
-        <div class="image-gallery">
-            <div class="gallery-item"><img src="imgs/789.PNG" class="zoom-trigger"></div>
-        </div>
-    </div>
-
-    <div id="lightbox" class="lightbox"><img id="lightbox-img"></div>
-    <script src="case-logic.js"></script>
+    <script src="script.js"></script> 
+    <script src="case-study.js"></script> 
 </body>
 </html>
